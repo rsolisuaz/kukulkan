@@ -18,8 +18,8 @@ def functionDataActuatorMqttOnMessage(mosq, obj, msg):
 def functionDataActuatorMqttSubscribe():
     mqttclient = paho.Client()
     mqttclient.on_message = functionDataActuatorMqttOnMessage
-    mqttclient.connect("test.mosquitto.org", 1883, 60)
-    mqttclient.subscribe("Xcambo/Main/DataActuator", 0)
+    mqttclient.connect("iot.eclipse.org", 1883, 60)
+    mqttclient.subscribe("Xcambo/Kukulkan/DataActuator", 0)
     while mqttclient.loop() == 0:
         pass
 
@@ -33,10 +33,10 @@ def functionDataSensorMqttOnPublish(mosq, obj, msg):
 def functionDataSensorMqttPublish():
     mqttclient = paho.Client()
     mqttclient.on_publish = functionDataSensorMqttOnPublish
-    mqttclient.connect("test.mosquitto.org", 1883, 60)
+    mqttclient.connect("iot.eclipse.org", 1883, 60)
     while True:
         data = functionDataSensor()
-        topic = "Xcambo/Main/DataSensor"
+        topic = "Xcambo/Kukulkan/DataSensor"
         mqttclient.publish(topic, data)
         time.sleep(1)
 
